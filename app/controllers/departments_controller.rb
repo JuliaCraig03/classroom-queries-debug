@@ -1,6 +1,6 @@
 class DepartmentsController < ApplicationController
   def index
-    @departments = Department.all.order({ :created_at => :desc })
+    @department = Department.all.order({ :created_at => :desc })
 
     render({ :template => "departments/index" })
   end
@@ -14,7 +14,7 @@ class DepartmentsController < ApplicationController
 
   def create
     @department = Department.new
-    @department.name = params.fetch("query_name")
+    @department.name = params.fetch("name")
 
     if @department.valid?
       @department.save
@@ -28,7 +28,7 @@ class DepartmentsController < ApplicationController
     the_id = params.fetch("path_id")
     @department = Department.where({ :id => the_id }).at(0)
 
-    @department.name = params.fetch("query_name")
+    @department.name = params.fetch("name")
 
     if @department.valid?
       @department.save
