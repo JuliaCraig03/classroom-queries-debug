@@ -14,9 +14,9 @@ class StudentsController < ApplicationController
 
   def create
     s = Student.new
-    s.first_name = params.fetch("first_name")
-    s.last_name = params.fetch("last_name")
-    s.email = params.fetch("email")
+    s.first_name = params.fetch("query_name")
+    s.last_name = params.fetch("query_last_name")
+    s.email = params.fetch("query_email")
 
     if s.valid?
       s.save
@@ -28,17 +28,17 @@ class StudentsController < ApplicationController
 
   def update
     s_id = params.fetch("path_id")
-    student = Student.where({ :id => the_id }).at(0)
+    student = Student.where({ :id => s_id }).at(0)
 
-    student.first_name = params.fetch("first_name")
-    student.last_name = params.fetch("last_name")
-    student.email = params.fetch("email")
+    student.first_name = params.fetch("query_first_name")
+    student.last_name = params.fetch("query_last_name")
+    student.email = params.fetch("query_email")
 
     if student.valid?
       student.save
-      redirect_to("/students/#{@student.id}", { :notice => "Student updated successfully."} )
+      redirect_to("/students/#{student.id}", { :notice => "Student updated successfully."} )
     else
-      redirect_to("/students/#{@student.id}", { :alert => "Student failed to update successfully." })
+      redirect_to("/students/#{student.id}", { :alert => "Student failed to update successfully." })
     end
   end
 
