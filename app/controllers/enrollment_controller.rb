@@ -12,3 +12,6 @@ class EnrollmentController < ApplicationController
     end
   end
 end
+
+
+#JULIA
